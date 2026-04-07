@@ -5,108 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora de IMC</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
             padding: 20px;
         }
 
         .container {
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
             max-width: 400px;
-            width: 100%;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border: 1px solid #ccc;
         }
 
         h1 {
-            color: #333;
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 28px;
+            font-size: 20px;
+            margin-bottom: 15px;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         label {
             display: block;
-            margin-bottom: 8px;
-            color: #555;
-            font-weight: 600;
+            margin-bottom: 5px;
+            font-weight: bold;
         }
 
         input {
             width: 100%;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-
-        input:focus {
-            outline: none;
-            border-color: #667eea;
+            padding: 8px;
+            border: 1px solid #999;
+            font-size: 14px;
+            box-sizing: border-box;
         }
 
         button {
             width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 8px;
+            background: #666;
             color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: 600;
+            border: 1px solid #333;
+            font-size: 14px;
             cursor: pointer;
-            transition: transform 0.2s;
         }
 
         button:hover {
-            transform: translateY(-2px);
-        }
-
-        button:active {
-            transform: translateY(0);
+            background: #555;
         }
 
         .error-message {
-            color: #e74c3c;
-            font-size: 14px;
-            margin-top: 5px;
-        }
-
-        .info {
-            background: #f0f4ff;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            font-size: 14px;
-            color: #555;
-            border-left: 4px solid #667eea;
+            color: red;
+            font-size: 12px;
+            margin-top: 3px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🏃 Calculadora de IMC</h1>
-
-        <div class="info">
-            <strong>IMC:</strong> Índice de Massa Corporal
-        </div>
+        <h1>Calculadora de IMC</h1>
 
         <form action="{{ route('imc.calcular') }}" method="POST">
             @csrf
@@ -117,7 +76,6 @@
                     type="number" 
                     id="peso" 
                     name="peso" 
-                    placeholder="Ex: 75"
                     step="0.1"
                     required
                     value="{{ old('peso') }}"
@@ -133,7 +91,6 @@
                     type="number" 
                     id="altura" 
                     name="altura" 
-                    placeholder="Ex: 1.75"
                     step="0.01"
                     required
                     value="{{ old('altura') }}"
@@ -143,7 +100,7 @@
                 @enderror
             </div>
 
-            <button type="submit">Calcular IMC</button>
+            <button type="submit">Calcular</button>
         </form>
     </div>
 </body>
