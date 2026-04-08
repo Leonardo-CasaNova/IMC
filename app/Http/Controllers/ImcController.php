@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Imc;
 
 class ImcController extends Controller
 {
@@ -21,28 +22,14 @@ class ImcController extends Controller
         $peso = $validated['peso'];
         $altura = $validated['altura'];
         
-        $imc = $peso / ($altura * $altura);
-        
-        $classificacao = $this->classificarImc($imc);
+        // Usa o model para calcular e classificar
+        $resultado = Imc::processar($peso, $altura);
 
         return view('imc.resultado', [
             'peso' => $peso,
             'altura' => $altura,
-            'imc' => number_format($imc, 2, ',', '.'),
-            'classificacao' => $classificacao
+            'imc' => number_format($resultado['imc'], 2, ',', '.'),
+            'classificacao' => $resultado['classificacao']
         ]);
-    }
-
-    private function classificarImc($imc)
-    {
-        if ($imc < 18.5) {
-            return 'Abaixo do peso';
-        } elseif ($imc < 25) {
-            return 'Peso normal';
-        } elseif ($imc < 30) {
-            return 'Sobrepeso';
-        } else {
-            return 'Obesidade';
-        }
     }
 }
